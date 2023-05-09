@@ -1,0 +1,89 @@
+<mvc:View controllerName="projnwfreestyle.controller.home"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:gtable="sap.ui.table"
+    
+	xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    
+    >
+    <!-- displayBlock="true" -->
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <VBox id="idVBox" fitContainer="true">
+            	
+                <smartFilterBar:SmartFilterBar
+					id="idCustomers"
+					entitySet="Customers"
+					enableBasicSearch="true"
+					basicSearchFieldName="CustomerID"
+					persistencyKey="CustomerID"> 
+                    <!-- filterChange="onFilterChange"> -->
+                    <smartFilterBar:controlConfiguration>
+
+						<smartFilterBar:ControlConfiguration id="idFilterCustomerId"
+							key="CustomerID"
+							visibleInAdvancedArea="true" >
+                            <smartFilterBar:defaultFilterValues>
+                                <smartFilterBar:SelectOption id="idSelectOptionCustomerID" low="CHOPS">
+                                </smartFilterBar:SelectOption>
+                            </smartFilterBar:defaultFilterValues>
+                        </smartFilterBar:ControlConfiguration>
+
+                        <smartFilterBar:ControlConfiguration id="idFilterCompanyName" key="CompanyName">
+                        </smartFilterBar:ControlConfiguration>
+  
+					</smartFilterBar:controlConfiguration>
+
+
+                    <smartFilterBar:layoutData>
+                        <FlexItemData id="idFlexItemData" shrinkFactor="0"/>
+                    </smartFilterBar:layoutData>
+                    <!-- <Button id="toggleUpdateMode" text="Change to 'LiveMode'" press="toggleUpdateMode"/> -->
+                </smartFilterBar:SmartFilterBar>
+
+                <smartTable:SmartTable id="LineItemsSmartTable" entitySet="Customers" smartFilterId="IdSmartFilterBar" tableType="Table" 
+                enableExport="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" header="Line Items" 
+                showRowCount="true" persistencyKey="CustomerID" enableAutoBinding="true" class="sapUiResponsiveContentPadding" 
+                enableAutoColumnWidth="true" editTogglable="false" app:useSmartToggle="true"
+                initiallyVisibleFields="CustomerID,CompanyName,Address,City,ContactName,ContactTitle,Phone">
+
+                    <smartTable:customToolbar>
+                        <!-- <OverflowToolbar id="idOverflowToolbar" design="Transparent">
+                            <ToolbarSpacer id="idToolbarSpacer"/>
+                            <Button id="idNewButton" text="New" type="Transparent" press="onNewButtonPress"/>
+                            <OverflowToolbarButton id="idOverflowToolbarButtonSort" icon="sap-icon://sort" text="Sort" press="onSort"/>
+                            <OverflowToolbarButton id="idOverflowToolbarButtonFilter" icon="sap-icon://filter" text="Filter" press="onFilter"/>
+                            <OverflowToolbarButton id="idOverflowToolbarButtonNew" icon="sap-icon://create" text="New" press="onClickNew"/>
+                        </OverflowToolbar> -->
+                    </smartTable:customToolbar>
+                        <!-- layout data used to make the table growing but the filter bar fixed -->
+                    <smartTable:layoutData>
+                        <FlexItemData id="idFlexItemData2"  growFactor="1" baseSize="0%"/>
+                    </smartTable:layoutData>
+                    <!-- <Table id="idTable">
+                        <columns>
+                            <Column id="idColumn" hAlign="Begin">
+                                <customData>
+                                    <core:CustomData key="p13nData"
+                                        value='\{"columnKey": "ContactTitle", "maxLength": "5","columnIndex":"4", "leadingProperty": "ContactTitle", "sortProperty": "CustomerID", "autoColumnWidth": \{"gap": -4} }' />
+                                </customData>
+                                <Text id="idText1" text="{/#LineItems/Dmbtr/@sap:label}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="idColumnListItem">
+                                <cells>
+                                    <Text id="idText2" text="{ContactTitle}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table> -->
+                </smartTable:SmartTable>
+		    </VBox>
+        </content>
+    </Page>
+</mvc:View>
